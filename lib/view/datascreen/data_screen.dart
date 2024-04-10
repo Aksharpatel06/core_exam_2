@@ -1,12 +1,14 @@
 
-
-
 import 'package:coreexam/model/modelclass.dart';
+import 'package:coreexam/utils/datalist.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../utils/color.dart';
 import '../../utils/datalist.dart';
 import '../../utils/variable.dart';
+
+import 'dart:io';
 
 class Data_screen extends StatefulWidget {
   const Data_screen({super.key});
@@ -34,8 +36,23 @@ class _Data_screenState extends State<Data_screen> {
           key: studentkey,
           child: Column(
             children: [
-              CircleAvatar(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
 
+                  SizedBox(
+                    height: 100,
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundImage: (imgpath!=null)?FileImage(imgpath!):null,
+                    ),
+                  ),
+                  InkWell(onTap: () {
+                    setState(() {
+                      getdata();
+                    });
+                  },child: Text('Pike Image')),
+                ],
               ),
               TextFormField(
                 controller: id,
@@ -79,7 +96,7 @@ class _Data_screenState extends State<Data_screen> {
               SizedBox(height: 10,),
               (isdetails)?InkWell(
                 onTap: () {
-                  Student s1=Student(grid: int.parse(id.text), name: name.text, std: int.parse(id.text));
+                  Student s1 =Student(grid: int.parse(id.text), name: name.text, std: int.parse(std.text),img: imgpath.toString());
                   data.add(s1);
                   Navigator.of(context).pushNamed('/').then((value) => setState(() {
                   }));
@@ -99,6 +116,7 @@ class _Data_screenState extends State<Data_screen> {
                   data[editindex].grid=int.parse(id.text);
                   data[editindex].name=name.text;
                   data[editindex].std=int.parse(std.text);
+                  data[editindex].img=imgpath!.path;
                   Navigator.of(context).pushNamed('/').then((value) => setState(() {
                   }));
                 },
@@ -119,4 +137,13 @@ class _Data_screenState extends State<Data_screen> {
       ),
     );
   }
+  Future<void> getdata()
+  async {
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imgpath = File(image!.path);
+    });
+  }
 }
+final ImagePicker picker = ImagePicker();
+File? imgpath;

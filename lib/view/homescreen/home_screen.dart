@@ -1,6 +1,8 @@
+import 'package:coreexam/model/modelclass.dart';
 import 'package:coreexam/utils/color.dart';
 import 'package:coreexam/utils/datalist.dart';
 import 'package:coreexam/utils/variable.dart';
+import 'package:coreexam/view/datascreen/data_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -45,71 +47,77 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget student_details(int index) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Container(
-            height: 100,
-            decoration: BoxDecoration(
-              color: color2,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(width: 10,),
-                Container(
-                  height: 70,
-                  width: 70,
-                  color: Colors.black,
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            displayindex=index;
+            Navigator.of(context).pushNamed('/display');
+          });
+        },
+        child: Container(
+          height: 100,
+          decoration: BoxDecoration(
+            color: color2,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(width: 10,),
+              SizedBox(height: 100,
+                child: CircleAvatar(
+                radius: 40,
+                  backgroundImage: (imgpath!=null)?
+                      FileImage(imgpath!):null,
                 ),
-                SizedBox(width: 10,),
-                Column(
-                  children: [
-                    SizedBox(height: 10,),
-                    Text("Grid:${data[index].grid}"),
-                    Text("Name:${data[index].name}"),
-                    Text("Std:${data[index].std}"),
-                  ],
+              ),
+              SizedBox(width: 10,),
+              Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text("Grid:${data[index].grid}"),
+                  Text("Name:${data[index].name}"),
+                  Text("Std:${data[index].std}"),
+                ],
+              ),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    editindex=index;
+                    isdetails =false;
+                    Navigator.of(context).pushNamed('/data');
+                  });
+                },
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: color1,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Icon(Icons.edit),
                 ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      editindex=index;
-                      isdetails =false;
-                      Navigator.of(context).pushNamed('/data');
-                    });
-                  },
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      color: color1,
+              ),
+              SizedBox(width: 10,),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    data.removeAt(index);
+                  });
+                },
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                      color: Colors.red,
                       borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Icon(Icons.edit),
                   ),
+                  child: Icon(Icons.delete),
                 ),
-                SizedBox(width: 10,),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      data.removeAt(index);
-                    });
-                  },
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Icon(Icons.delete),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

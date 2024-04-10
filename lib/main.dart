@@ -1,4 +1,5 @@
 import 'package:coreexam/view/datascreen/data_screen.dart';
+import 'package:coreexam/view/displaydetails/displayscreen.dart';
 import 'package:coreexam/view/homescreen/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomeScreen(),
         '/data':(context) => Data_screen(),
+        '/display':(context) => Displayscreen(),
       },
     );
   }
