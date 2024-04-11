@@ -28,7 +28,7 @@ class _Data_screenState extends State<Data_screen> {
       appBar: AppBar(
         backgroundColor: primaycolor,
         centerTitle: true,
-        title: Text('Details',style: TextStyle(color: Colors.white),),
+        title: const Text('Details',style: TextStyle(color: Colors.white),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -44,14 +44,15 @@ class _Data_screenState extends State<Data_screen> {
                     height: 100,
                     child: CircleAvatar(
                       radius: 40,
-                      backgroundImage: (imgpath!=null)?FileImage(imgpath!):null,
+                      backgroundImage:(isdetails)? (imgpath!=null)?FileImage(imgpath!):null:(data[editindex].img!=null)?
+                      FileImage(data[editindex].img):null,
                     ),
                   ),
                   InkWell(onTap: () {
                     setState(() {
                       getdata();
                     });
-                  },child: Text('Pike Image')),
+                  },child: const Text('Pike Image')),
                 ],
               ),
               TextFormField(
@@ -67,7 +68,7 @@ class _Data_screenState extends State<Data_screen> {
                   )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               TextFormField(
                 controller: name,
                 keyboardType: TextInputType.text,
@@ -80,7 +81,7 @@ class _Data_screenState extends State<Data_screen> {
                     )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               TextFormField(
                 controller: std,
                 keyboardType: TextInputType.number,
@@ -93,10 +94,10 @@ class _Data_screenState extends State<Data_screen> {
                     )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               (isdetails)?InkWell(
                 onTap: () {
-                  Student s1 =Student(grid: int.parse(id.text), name: name.text, std: int.parse(std.text),img: imgpath.toString());
+                  Student s1 =Student(grid: int.parse(id.text), name: name.text, std: int.parse(std.text),img: imgpath!);
                   data.add(s1);
                   Navigator.of(context).pushNamed('/').then((value) => setState(() {
                   }));
@@ -109,14 +110,15 @@ class _Data_screenState extends State<Data_screen> {
                     color: color2,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Text('save'),
+                  child: const Text('save'),
                 ),
               ):InkWell(
                 onTap: () {
-                  data[editindex].grid=int.parse(id.text);
-                  data[editindex].name=name.text;
-                  data[editindex].std=int.parse(std.text);
-                  data[editindex].img=imgpath!.path;
+                  data[editindex].grid = int.parse(id.text);
+                  data[editindex].name = name.text;
+                  data[editindex].std = int.parse(std.text);
+                  data[editindex].img = imgpath!;
+
                   Navigator.of(context).pushNamed('/').then((value) => setState(() {
                   }));
                 },
@@ -128,7 +130,7 @@ class _Data_screenState extends State<Data_screen> {
                     color: color2,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Text('update'),
+                  child: const Text('update'),
                 ),
               ),
             ],
@@ -145,5 +147,3 @@ class _Data_screenState extends State<Data_screen> {
     });
   }
 }
-final ImagePicker picker = ImagePicker();
-File? imgpath;

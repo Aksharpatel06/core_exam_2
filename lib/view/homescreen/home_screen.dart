@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:coreexam/model/modelclass.dart';
 import 'package:coreexam/utils/color.dart';
 import 'package:coreexam/utils/datalist.dart';
@@ -20,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: primaycolor,
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           'Student Details',
           style: TextStyle(color: Colors.white),
         ),
@@ -36,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.of(context).pushNamed('/data');
         },
         backgroundColor: primaycolor,
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Colors.white,
         ),
@@ -63,18 +65,18 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
               SizedBox(height: 100,
                 child: CircleAvatar(
                 radius: 40,
-                  backgroundImage: (imgpath!=null)?
-                      FileImage(imgpath!):null,
+                  backgroundImage: (data[index].img!=null)?
+                      FileImage(data[index].img):null,
                 ),
               ),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
               Column(
                 children: [
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Text("Grid:${data[index].grid}"),
                   Text("Name:${data[index].name}"),
                   Text("Std:${data[index].std}"),
@@ -95,10 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: color1,
                     borderRadius: BorderRadius.circular(10)
                   ),
-                  child: Icon(Icons.edit),
+                  child: const Icon(Icons.edit),
                 ),
               ),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
               InkWell(
                 onTap: () {
                   setState(() {
@@ -112,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(10)
                   ),
-                  child: Icon(Icons.delete),
+                  child: const Icon(Icons.delete),
                 ),
               ),
             ],

@@ -1,6 +1,5 @@
 import 'package:coreexam/model/modelclass.dart';
 import 'package:coreexam/utils/variable.dart';
-import 'package:coreexam/view/datascreen/data_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/color.dart';
@@ -20,7 +19,7 @@ class _DisplayscreenState extends State<Displayscreen> {
       appBar: AppBar(
         backgroundColor: primaycolor,
         centerTitle: true,
-        title: Text('Deplay screen',style: TextStyle(color: Colors.white),),
+        title: const Text('Deplay screen',style: TextStyle(color: Colors.white),),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,7 +28,8 @@ class _DisplayscreenState extends State<Displayscreen> {
             height: 100,
             child: CircleAvatar(
               radius: 40,
-              backgroundImage: (imgpath!=null)?FileImage(imgpath!):null,
+              backgroundImage: (data[editindex].img!=null)?
+              FileImage(data[editindex].img):null,
             ),
           ),
           Container(
@@ -39,7 +39,7 @@ class _DisplayscreenState extends State<Displayscreen> {
               color: color3,
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
-                BoxShadow(
+                const BoxShadow(
                   color: Colors.black,
                   spreadRadius: 1,
                   blurRadius: 0.5
