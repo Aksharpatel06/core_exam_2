@@ -1,11 +1,9 @@
 
 import 'package:coreexam/model/modelclass.dart';
-import 'package:coreexam/utils/datalist.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../utils/color.dart';
-import '../../utils/datalist.dart';
 import '../../utils/variable.dart';
 
 import 'dart:io';
